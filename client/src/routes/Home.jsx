@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function Home() {
   return (
     <section className="flex flex-col gap-10 animate-fade-up">
@@ -14,12 +16,18 @@ export default function Home() {
             vehicle ads, and guide travelers to beautiful places to visit.
           </p>
           <div className="flex flex-wrap gap-3">
-            <button className="rounded-full bg-sand-900 px-6 py-3 text-sm font-semibold text-sand-50 shadow-lift">
+            <Link
+              to="/listings"
+              className="rounded-full bg-sand-900 px-6 py-3 text-sm font-semibold text-sand-50 shadow-lift hover:bg-sand-800"
+            >
               Start search
-            </button>
-            <button className="rounded-full border border-sand-900 px-6 py-3 text-sm font-semibold text-sand-900">
+            </Link>
+            <Link
+              to="/host"
+              className="rounded-full border border-sand-900 px-6 py-3 text-sm font-semibold text-sand-900 hover:bg-sand-900 hover:text-sand-50"
+            >
               List your property
-            </button>
+            </Link>
           </div>
         </div>
         <div className="grid content-start gap-4 rounded-2xl bg-white/70 p-6">
@@ -76,9 +84,12 @@ export default function Home() {
             with confidence.
           </p>
         </div>
-        <button className="rounded-full bg-sand-50 px-6 py-3 text-sm font-semibold text-sand-900">
+        <Link
+          to="/host"
+          className="rounded-full bg-sand-50 px-6 py-3 text-sm font-semibold text-sand-900 hover:bg-sand-100"
+        >
           Create listing
-        </button>
+        </Link>
       </div>
     </section>
   );
