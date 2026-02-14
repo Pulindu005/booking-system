@@ -20,10 +20,10 @@ export default function App() {
             </Link>
             <Link className="hover:text-sand-700" to="/listings">
               Browse
-            </Link>trip-planner">
+            </Link>
+            <Link className="hover:text-sand-700" to="/trip-planner">
               Trip Planner 🤖
             </Link>
-            <Link className="hover:text-sand-700" to="/
             <Link className="hover:text-sand-700" to="/login">
               Login
             </Link>

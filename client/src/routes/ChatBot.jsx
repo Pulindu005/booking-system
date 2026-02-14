@@ -20,7 +20,11 @@ const botResponses = {
   
   food: "Sri Lankan food is incredible! 🍛\n\nMust-try dishes:\n• Rice & Curry (national dish)\n• Hoppers (breakfast)\n• Kottu Roti (street food)\n• Fresh seafood\n• Ceylon Tea\n\nMost meals: $3-10 at local spots, $15-30 at restaurants.",
   
-  default: "I can help with:\n• Trip duration & itinerary planning\n• Hotel & vehicle bookings\n• Budget estimates\n• Food recommendations\n• Best places to visit\n\nWhat would you like to know?"
+  weather: "🌤️ Sri Lanka Weather:\n\n• Coastal areas: 25-30°C year-round\n• Hill country (Kandy, Nuwara Eliya): 15-25°C\n• Best time: December-March (dry season)\n• Monsoon: May-September (southwest coast)\n\nFor live weather forecasts, check weather.com\n\nWhat else can I help with?",
+  
+  activities: "🎯 Popular Activities:\n\n• Whale watching (Mirissa)\n• Safari at Yala National Park\n• Surfing (Arugam Bay, Hikkaduwa)\n• Temple visits & cultural tours\n• Tea plantation tours (Nuwara Eliya)\n• Rock climbing (Sigiriya, Pidurangala)\n• Waterfall visits\n\nWhich interests you?",
+  
+  default: "I can help with:\n• Trip duration & itinerary planning\n• Hotel & vehicle bookings\n• Budget estimates\n• Food recommendations\n• Weather info\n• Activities & places to visit\n\nWhat would you like to know?"
 };
 
 export default function ChatBot() {
@@ -41,6 +45,20 @@ export default function ChatBot() {
   const getBotResponse = (userText) => {
     const text = userText.toLowerCase();
     
+    // Weather responses (check FIRST before other topics)
+    if (text.includes("weather") || text.includes("temperature") || text.includes("rain") || 
+        text.includes("hot") || text.includes("cold") || text.includes("climate") || 
+        text.includes("forecast") || text.includes("sunny") || text.includes("cloudy")) {
+      return botResponses.weather;
+    }
+
+    // Activities responses
+    if (text.includes("activity") || text.includes("activities") || text.includes("things to do") || 
+        text.includes("what to do") || text.includes("safari") || text.includes("whale") || 
+        text.includes("surf") || text.includes("beach")) {
+      return botResponses.activities;
+    }
+    
     // Days responses
     if (text.match(/\b[1-2]\b/) || text.includes("couple") || text.includes("weekend")) {
       return botResponses.days_3;
@@ -56,19 +74,24 @@ export default function ChatBot() {
     }
 
     // Topic responses
-    if (text.includes("hotel") || text.includes("stay") || text.includes("accommodation")) {
+    if (text.includes("hotel") || text.includes("stay") || text.includes("accommodation") || 
+        text.includes("villa") || text.includes("resort")) {
       return botResponses.hotels;
     }
-    if (text.includes("car") || text.includes("bike") || text.includes("vehicle") || text.includes("transport")) {
+    if (text.includes("car") || text.includes("bike") || text.includes("vehicle") || 
+        text.includes("transport") || text.includes("rental") || text.includes("rent")) {
       return botResponses.vehicles;
     }
-    if (text.includes("budget") || text.includes("cost") || text.includes("price") || text.includes("expensive")) {
+    if (text.includes("budget") || text.includes("cost") || text.includes("price") || 
+        text.includes("expensive") || text.includes("cheap") || text.includes("money")) {
       return botResponses.budget;
     }
-    if (text.includes("food") || text.includes("eat") || text.includes("restaurant") || text.includes("dish")) {
+    if (text.includes("food") || text.includes("eat") || text.includes("restaurant") || 
+        text.includes("dish") || text.includes("lunch") || text.includes("dinner") || 
+        text.includes("breakfast")) {
       return botResponses.food;
     }
-    if (text.includes("browse") || text.includes("listing")) {
+    if (text.includes("browse") || text.includes("listing") || text.includes("show me")) {
       return "Perfect! Click here to browse all listings, or I can keep helping you plan. 😊";
     }
 
@@ -100,7 +123,7 @@ export default function ChatBot() {
     }
   };
 
-  const quickReplies = ["3 days", "1 week", "Hotels", "Budget", "Food tips"];
+  const quickReplies = ["3 days", "1 week", "Weather", "Activities", "Hotels", "Budget"];
 
   return (
     <div className="mx-auto max-w-4xl">
