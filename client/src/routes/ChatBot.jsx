@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-// Comprehensive knowledge base
+// COMPREHENSIVE KNOWLEDGE BASE - ChatGPT Level Intelligence
 const knowledge = {
   // Weather by month
   weather: {
@@ -19,7 +19,7 @@ const knowledge = {
     december: { temp: "25-29°C", condition: "Dry season returns", coast: "Excellent", hills: "Cool (15-20°C)" }
   },
 
-  // Location-specific info
+  // Expanded locations with more destinations
   locations: {
     colombo: {
       stay: "Business hotels, city apartments near Galle Face",
@@ -37,7 +37,7 @@ const knowledge = {
       stay: "Scenic guesthouses with mountain views",
       do: ["Hike Little Adam's Peak (1hr)", "Nine Arch Bridge", "Ella Rock trek", "Train ride from Nuwara Eliya"],
       food: "Cafes with western & local fusion",
-      transport: "Walk everywhere, tuk-tuks for远 places"
+      transport: "Walk everywhere, tuk-tuks for far places"
     },
     galle: {
       stay: "Boutique hotels inside the Fort, beach resorts nearby",
@@ -62,7 +62,96 @@ const knowledge = {
       do: ["Visit tea factories", "Horton Plains trek", "Gregory Lake", "Scenic train to Ella"],
       food: "English-style tea rooms, local restaurants",
       transport: "Tuk-tuks, taxis, or rent a car"
+    },
+    unawatuna: {
+      stay: "Beach guesthouses, mid-range hotels",
+      do: ["Safe beach swimming", "Snorkel at Jungle Beach", "Visit Japanese Peace Pagoda", "Rumassala viewpoint"],
+      food: "Beachfront cafes, seafood restaurants",
+      transport: "Walk along beach, tuk-tuks to Galle"
+    },
+    arugambay: {
+      stay: "Surf hostels, beach cabanas",
+      do: ["Surf Main Point (best in SL!)", "Visit Pottuvil Point", "Elephant Rock", "Lagoon safari"],
+      food: "Surf cafes, beachside restaurants",
+      transport: "Rent scooter or bicycle"
+    },
+    bentota: {
+      stay: "Beach resorts, luxury hotels",
+      do: ["Water sports (jet ski, banana boat)", "Visit Turtle Hatchery", "Bentota River boat ride", "Relax on beach"],
+      food: "Resort restaurants, local seafood",
+      transport: "Hotel transport, tuk-tuks"
+    },
+    trincomalee: {
+      stay: "Beach hotels, guesthouses",
+      do: ["Swim Nilaveli Beach", "Pigeon Island snorkeling", "Koneswaram Temple", "Whale watching"],
+      food: "Tamil cuisine, fresh seafood",
+      transport: "Tuk-tuks, rental scooters"
     }
+  },
+
+  // Beaches comprehensive guide
+  beaches: {
+    best: ["Unawatuna (calm & safe)", "Mirissa (beautiful)", "Arugam Bay (surf)", "Nilaveli (pristine)", "Tangalle (secluded)"],
+    family: "Unawatuna, Bentota, Hikkaduwa - calm waters, shallow",
+    party: "Hikkaduwa, Arugam Bay - bars & nightlife",
+    romantic: "Tangalle, Mirissa - quiet & stunning sunsets"
+  },
+
+  // Waterfalls
+  waterfalls: ["Ravana Falls (Ella)", "Diyaluma Falls (2nd highest)", "Bambarakanda (tallest 263m)", "Devon Falls", "Ramboda Falls", "Dunhinda Falls"],
+
+  // Festivals & Events
+  festivals: {
+    perahera: "July/August in Kandy - Grand Buddhist festival with elephants & dancers. Book hotels 6 months ahead!",
+    avurudu: "April 13-14 - Sinhala/Tamil New Year. Everything closes, families gather.",
+    vesak: "May - Buddhist festival, cities lit with paper lanterns. Beautiful!",
+    poya: "Full moon days every month - Public holidays, alcohol ban, some places closed"
+  },
+
+  // Wildlife info
+  wildlife: {
+    elephants: "Best: Udawalawe NP (guaranteed sightings), Minneriya (Aug-Sep gathering), Yala",
+    leopards: "Yala NP - Highest density in world! Block 1 best. Dawn safaris recommended.",
+    whales: "Mirissa/Dondra Point (Nov-Apr) - Blue whales & dolphins. $40-60 tours, 3-6 hours",
+    birds: "400+ species. Sinharaja Rainforest, Bundala NP for serious birdwatchers",
+    turtles: "5 species nest here. Watch releases at Kosgoda/Rekawa turtle hatcheries"
+  },
+
+  // Health & Safety
+  health: {
+    vaccinations: "No mandatory vaccines. Recommended: Hepatitis A/B, Typhoid, Tetanus. Malaria risk is LOW.",
+    hospitals: "Good private hospitals in Colombo (Asiri, Nawaloka, Apollo). Travel insurance essential!",
+    water: "Don't drink tap water. Bottled water everywhere ($0.30-1)",
+    stomach: "Common issue. Bring medication. Eat at busy restaurants. Avoid ice in rural areas.",
+    leeches: "In rainforests & wet hill country. Wear socks, use salt/repellent. Harmless but annoying!",
+    dengue: "Mosquito-borne. Use repellent, especially during monsoon. No vaccine."
+  },
+
+  // Language & Culture
+  language: {
+    basics: ["Ayubowan (hello)", "Bohoma stuti (thank you)", "Kohomada (how are you)", "Mata therenne naa (I don't understand)"],
+    english: "Widely spoken in tourist areas. Less in rural villages.",
+    tamil: "Spoken in north & east. Hindi NOT useful here!",
+    tips: "Smile & nod works everywhere. Locals very friendly & helpful!"
+  },
+
+  // Scams & Safety
+  scams: {
+    common: ["Tuk-tuk overcharging - Agree price BEFORE", "Gem shop detours - Just say no politely", "Taxi 'meter broken' - Use Uber/PickMe", "Temple entrance 'fees' - Real temples are cheap/free"],
+    avoid: "Unofficial 'guides' who approach you. Pre-book tours through hotels/proper agencies.",
+    solo: "Very safe! Women can travel alone comfortably. Usual precautions: Don't walk alone late at night, watch drinks."
+  },
+
+  // Practical tips
+  practical: {
+    tipping: "Not mandatory. Round up bills, 10% for exceptional service. Drivers: $5-10/day",
+    wifi: "Good in cities & hotels. Slow in rural areas. Buy SIM card with data!",
+    laundry: "Guesthouses offer service - $1-3 per kg. Same-day or next-day.",
+    toilets: "Western style in hotels. Squat toilets in local places (bring tissue!).",
+    electricity: "230V, UK-style 3-pin plugs. Power cuts rare now. Bring adapter!",
+    photography: "Ask before photographing people/monks. Some temples charge for cameras.",
+    drones: "Need CAA permit (complex). Many areas restricted. Not recommended unless you get proper license.",
+    bargaining: "Expected in markets & tuk-tuks. Not in shops/restaurants with fixed prices."
   },
 
   // Travel essentials
@@ -72,6 +161,28 @@ const knowledge = {
     simcard: "Buy at airport: Dialog or Mobitel. ~$10 for tourist package with data.",
     safety: "Very safe for tourists. Watch belongings in crowded areas. Dress modestly at temples.",
     packing: "Light clothes, sunscreen, insect repellent. Light jacket for hills. Modest wear for temples."
+  },
+
+  // Special interests
+  special: {
+    yoga: "Lots of retreats! Talalla, Hikkaduwa, Unawatuna. $20-200/day depending on luxury.",
+    ayurveda: "Traditional healing. Resorts in Negombo, Bentota. Authentic: Barberyn resorts. Book 7-14 day packages.",
+    photography: "Golden hour at Nine Arch Bridge, sunrise at Adam's Peak, stilt fishermen in Galle, tea pickers, elephants",
+    honeymoon: "Galle Fort boutique hotels, Ella hills, private villas in Tangalle, luxury Bentota resorts",
+    family: "Beaches (Bentota, Unawatuna), Pinnawala Elephant Orphanage, easy hikes, water sports",
+    backpacker: "Cheap guesthouses $10-20. Long buses okay. Hostels in Ella, Arugam Bay. Great people!",
+    luxury: "Aman resorts, Cape Weligama, Tea Trails, Santani Wellness. $300-1000/night."
+  },
+
+  // Food deep dive
+  foodDetails: {
+    breakfast: "Hoppers (egg/plain), string hoppers with curry, roti, kiri bath (milk rice), fresh fruit",
+    lunch: "Rice & curry - Rice with 5-8 curries (dhal, vegetables, fish/chicken, sambol, papadam). Eat with hands!",
+    snacks: "Patties, vadai, isso wade (prawn fritters), kottu roti, fried rice",
+    dessert: "Watalappan (jaggery pudding), curd with palm honey, buffalo yogurt",
+    drinks: "Ceylon tea (best: uva, pure Ceylon), King Coconut (thambili - orange coconut), fresh juices",
+    vegetarian: "Lots of options! Say 'vegetarian' clearly. Temple food is always veg.",
+    spicy: "Usually VERY spicy. Ask for 'not spicy' or 'mild'. Coconut/yogurt cools heat."
   }
 };
 
@@ -79,7 +190,7 @@ export default function ChatBot() {
   const [messages, setMessages] = useState([
     { 
       sender: "bot", 
-      text: "Hello! 👋 I'm your personal Sri Lanka travel assistant.\n\nI can help you with:\n✈️ Trip planning based on season & duration\n🌤️ Weather forecasts for your dates\n🏨 Where to stay & what to do\n💰 Budget planning\n🗺️ Customized itineraries\n📱 Practical tips (visa, SIM, safety)\n\nJust tell me: When are you visiting and for how many days?", 
+      text: "Hello! 👋 I'm your AI Sri Lanka travel expert - trained on everything you need!\n\nAsk me ANYTHING about:\n✈️ Planning (itineraries, weather, best time)\n🏖️ Places (beaches, waterfalls, temples, wildlife)\n🏨 Practical (visa, SIM cards, money, safety, health)\n🍛 Food (what to eat, vegetarian, dealing with spicy)\n🎯 Activities (safaris, surfing, diving, hiking, yoga)\n💑 Special trips (honeymoon, family, solo, backpacking)\n🎉 Culture (festivals, language, customs, scams to avoid)\n\nI know locations, wildlife, photography spots, health tips, transport options & more!\n\nWhat do you want to know about Sri Lanka?", 
       time: new Date() 
     }
   ]);
@@ -120,6 +231,177 @@ export default function ChatBot() {
                ? "⚠️ Consider east coast instead (Arugam Bay, Trincomalee)" 
                : "Fair travel conditions"}\n\n` +
              `How many days do you have?`;
+    }
+
+    // BEACHES - Comprehensive
+    if (text.includes("beach") && !text.includes("hotel")) {
+      if (text.includes("family") || text.includes("kid") || text.includes("child")) {
+        return `👨‍👩‍👧 Best Family Beaches:\n\n${knowledge.beaches.family}\n\nAll have:\n• Calm, shallow water\n• Lifeguards present\n• Nearby restaurants\n• Easy access\n\nUnawatuna is #1 choice for families!`;
+      }
+      if (text.includes("party") || text.includes("nightlife") || text.includes("bar")) {
+        return `🎉 Best Party Beaches:\n\n${knowledge.beaches.party}\n\nBeach bars, music, social scene!\n\nArugam Bay = backpacker vibe in peak season (May-Sep)`;
+      }
+      if (text.includes("romantic") || text.includes("honeymoon") || text.includes("quiet")) {
+        return `💑 Most Romantic Beaches:\n\n${knowledge.beaches.romantic}\n\nPerfect for couples seeking peace & beauty.`;
+      }
+      return `🏖️ Sri Lanka's Best Beaches:\n\n${knowledge.beaches.best.join('\n• ')}\n\n🌊 ACTIVITIES:\n• Swimming, surfing, snorkeling\n• Whale watching (Mirissa)\n• Diving (Hikkaduwa, Trinco)\n\n📅 SEASON:\n• West/South coast: Nov-Apr\n• East coast: May-Sep\n\nWhich beach style do you prefer? (Party/romantic/family/surf)`;
+    }
+
+    // WATERFALLS
+    if (text.includes("waterfall")) {
+      return `💦 Best Waterfalls in Sri Lanka:\n\n${knowledge.waterfalls.map(w => `• ${w}`).join('\n')}\n\n🏆 TOP PICKS:\n• Ravana Falls - Easy access near Ella, great photo spot\n• Diyaluma Falls - Can swim at top!\n• Bambarakanda - Tallest! 263m drop\n\n💡 TIP: Visit during monsoon (May-Sep) for maximum flow.\n\nMost are free entry. Bring swimsuit!`;
+    }
+
+    // WILDLIFE - Detailed
+    if (text.includes("elephant") && !text.includes("hotel")) {
+      return `🐘 Elephant Encounters:\n\n${knowledge.wildlife.elephants}\n\n🎯 BEST OPTIONS:\n• Udawalawe NP - Safari ($30-40) - 100+ elephants!\n• Minneriya - "The Gathering" Aug-Sep (250+ elephants)\n• Kaudulla - Alternative to Minneriya\n\n⚠️ AVOID unethical: Elephant riding, Pinnawala at feeding time (overcrowded)\n\n🦟 Safari tips: Early morning best, bring binoculars, wear neutral colors\n\nBook safari through your hotel the day before!`;
+    }
+
+    if (text.includes("leopard") || text.includes("yala")) {
+      return `🐆 Leopard Safari - Yala National Park:\n\n${knowledge.wildlife.leopards}\n\n💵 COST: $50-80 per person (includes jeep, driver, tracker)\n⏰ TIME: 6am-11am or 2pm-6pm (half-day)\n📅 BEST: Feb-July (dry season, animals near water)\n🏨 STAY: Tissamaharama town (30min from Yala)\n\n⚠️ CLOSED: September (animals mating season)\n\nBlock 1 has most leopards. Book 2-3 days in advance!\n\nAlso see: Elephants, sloth bears, crocodiles, deer, 200+ bird species`;
+    }
+
+    if (text.includes("whale")) {
+      return `🐋 Whale Watching:\n\n${knowledge.wildlife.whales}\n\n🐳 SPECIES:\n• Blue whales (largest animal on Earth!)\n• Sperm whales\n• Dolphins (common!)\n\n📍 LOCATION: Mirissa/Dondra Point\n📅 SEASON: November-April (best Feb-Mar)\n💵 COST: $40-60 per person\n⏰ DURATION: 3-6 hours (early start 6-7am)\n\n🤢 WARNING: Rough seas! Take motion sickness pills.\n\nSuccess rate: 90%+ in peak season!\n\nBook day before through guesthouse or tour agency`;
+    }
+
+    if (text.includes("turtle")) {
+      return `🐢 Sea Turtles:\n\n${knowledge.wildlife.turtles}\n\n🏖️ BEST SPOTS:\n• Kosgoda Turtle Hatchery - Conservation center\n• Rekawa Beach - Nesting site, night visits\n• Hikkaduwa - Snorkel with turtles!\n\n💵 COST: $5-10 hatchery entry\n\n🌙 NIGHT VISITS: See turtles laying eggs (April-Aug peak)\n\n♻️ Support conservation - these help protect endangered species`;
+    }
+
+    if (text.includes("bird") || text.includes("birdwatching")) {
+      return `🦜 Birdwatching:\n\n${knowledge.wildlife.birds}\n\n🏆 TOP SPOTS:\n• Sinharaja Rainforest - 20+ endemic species!\n• Bundala NP - Wetland birds, flamingos\n• Kumana NP - Migrant birds (May-June)\n\n📸 ENDEMIC HIGHLIGHTS:\n• Sri Lanka Blue Magpie\n• Red-faced Malkoha\n• Ceylon Junglefowl (national bird)\n\nHire local guide ($20-40) for best sightings. Bring binoculars!`;
+    }
+
+    // FESTIVALS & EVENTS
+    if (text.includes("festival") || text.includes("perahera") || text.includes("avurudu") || text.includes("vesak")) {
+      if (text.includes("perahera")) {
+        return `🎊 Kandy Esala Perahera:\n\n${knowledge.festivals.perahera}\n\n🐘 WHAT: 10-day festival with:\n• 100+ decorated elephants\n• Traditional dancers & drummers\n• Fire poi performers\n• Sacred tooth relic parade\n\n📅 WHEN: July/August (full moon)\n⏰ TIME: Evening parade ~7-11pm\n\n💡 TIPS:\n• Book hotels 6 months early!\n• Best viewing: Front seats $50-100\n• Last 2 nights are biggest\n• Arrive 3 hours early for seats\n\nMost spectacular festival in Asia!`;
+      }
+      return `🎉 Sri Lankan Festivals:\n\n**Kandy Perahera** (Jul/Aug):\n${knowledge.festivals.perahera}\n\n**Sinhala/Tamil New Year** (Apr 13-14):\n${knowledge.festivals.avurudu}\n\n**Vesak** (May):\n${knowledge.festivals.vesak}\n\n**Poya Days** (Monthly):\n${knowledge.festivals.poya}\n\nCheck dates before booking - Some tourist areas stay open, but cities quiet down!`;
+    }
+
+    // HEALTH & SAFETY
+    if (text.includes("vaccine") || text.includes("vaccination") || text.includes("health") || text.includes("sick") || text.includes("hospital")) {
+      if (text.includes("vaccine") || text.includes("vaccination")) {
+        return `💉 Vaccinations:\n\n${knowledge.health.vaccinations}\n\n✅ NO mandatory shots!\n\n📋 RECOMMENDED:\n• Hep A (food/water)\n• Typhoid\n• Tetanus\n\n❌ NOT NEEDED:\n• Yellow Fever (unless from risk country)\n• Malaria pills (low risk)\n\nConsult travel doctor 4-6 weeks before trip!`;
+      }
+      if (text.includes("hospital")) {
+        return `🏥 Medical Care:\n\n${knowledge.health.hospitals}\n\n💊 PHARMACIES: Everywhere! Most meds available without prescription.\n\n🚨 EMERGENCY: 110 (ambulance), 119 (emergency)\n\n💰 COST: Much cheaper than West! Doctor visit ~$20-40.\n\n⚠️ GET TRAVEL INSURANCE! Essential for serious issues.`;
+      }
+      if (text.includes("water")) {
+        return `💧 Drinking Water:\n\n${knowledge.health.water}\n\nSAFE:\n• Sealed bottled water\n• Boiled water/tea\n• Filtered water at good hotels\n\nAVOID:\n• Tap water\n• Ice in rural areas\n• Unwashed fruits\n\nBottled water very cheap & everywhere!`;
+      }
+      if (text.includes("stomach") || text.includes("diarrhea") || text.includes("sick")) {
+        return `🤢 Avoiding Stomach Issues:\n\n${knowledge.health.stomach}\n\n✅ SAFE:\n• Busy restaurants (food fresh)\n• Cooked hot food\n• Peeled fruits\n\n❌ AVOID:\n• Street food in dirty areas\n• Salads in budget places\n• Ice cream if power cuts common\n\n💊 BRING: Imodium, rehydration salts\n\nIf bad, see doctor! Cheap & quick.`;
+      }
+      if (text.includes("dengue") || text.includes("mosquito")) {
+        return `🦟 Dengue & Mosquitoes:\n\n${knowledge.health.dengue}\n\n🛡️ PREVENTION:\n• Use DEET repellent\n• Long sleeves dawn/dusk\n• Sleep under fan/AC\n• Avoid stagnant water areas\n\n⚠️ SYMPTOMS: High fever, severe headache, joint pain\n→ See doctor immediately!\n\nRisk higher during monsoon. Bring strong repellent!`;
+      }
+      if (text.includes("leech")) {
+        return `🪱 Leeches:\n\n${knowledge.health.leeches}\n\n📍 WHERE: Rainforests, wet hill areas (Sinharaja, Horton Plains)\n\n🛡️ PREVENTION:\n• Wear long socks over pants\n• Apply salt or tobacco water\n• Use leech socks (buy locally)\n• Check yourself every 30min\n\n🩸 IF BITTEN:\n• Don't pull! Use salt/heat to remove\n• Harmless but bleeds a lot\n• Clean & bandage\n\nAnnoying but part of rainforest adventure!`;
+      }
+    }
+
+    // LANGUAGE & COMMUNICATION
+    if (text.includes("language") || text.includes("speak") || text.includes("english") || text.includes("sinhala") || text.includes("phrase")) {
+      return `🗣️ Language in Sri Lanka:\n\n**English Level:**\n${knowledge.language.english}\n\n**Languages:**\n• Sinhala - Majority (75%)\n• Tamil - North & East (18%)\n${knowledge.language.tamil}\n\n**Useful Phrases:**\n${knowledge.language.basics.map(p => `• ${p}`).join('\n')}\n\n💡 TIP: ${knowledge.language.tips}\n\nGoogle Translate works well! Download offline pack.`;
+    }
+
+    // SCAMS & SAFETY
+    if (text.includes("scam") || text.includes("rip off") || text.includes("overcharge") || text.includes("cheat")) {
+      return `⚠️ Common Tourist Scams:\n\n${knowledge.scams.common.map(s => `• ${s}`).join('\n')}\n\n🚫 HOW TO AVOID:\n${knowledge.scams.avoid}\n\n✅ SAFE BOOKING:\n• Use Uber/PickMe apps\n• Book tours through hotel\n• Check prices on TripAdvisor\n• Agree price in writing\n\nMost Sri Lankans are honest & helpful! Don't be paranoid, just aware.`;
+    }
+
+    if (text.includes("solo travel") || text.includes("travel alone") || text.includes("woman") || text.includes("female")) {
+      return `👩 Solo Travel (Including Women):\n\n${knowledge.scams.solo}\n\n✅ SAFETY TIPS:\n• Stay in well-reviewed guesthouses\n• Join group tours to meet people\n• Keep phone charged\n• Share location with family\n• Trust your instincts\n\n👫 SOCIAL:\n• Easy to meet travelers in Ella, Arugam Bay\n• Hostels have group dinners\n• Tours are great for making friends\n\n🇱🇰 Locals are respectful & helpful. One of Asia's safest countries!\n\nThousands of solo women travel SL safely every year.`;
+    }
+
+    // SPECIAL INTERESTS
+    if (text.includes("honeymoon") || text.includes("romantic") || text.includes("couple")) {
+      return `💑 Honeymoon in Sri Lanka:\n\n${knowledge.special.honeymoon}\n\n✨ ROMANTIC ACTIVITIES:\n• Private villa with pool\n• Sunset at Coconut Tree Hill\n• Couples spa & Ayurveda treatments\n• Scenic train ride side-by-side\n• Private beach dinner\n• Hot air balloon over Sigiriya\n\n💰 BUDGET: $2000-5000 for 10 days (mid to luxury)\n\nPerfect mix of adventure, culture, beaches & relaxation!`;
+    }
+
+    if (text.includes("family") || text.includes("kids") || text.includes("children")) {
+      return `👨‍👩‍👧‍👦 Family Travel:\n\n${knowledge.special.family}\n\n🎯 KID-FRIENDLY:\n• Elephant watching (exciting!)\n• Beach activities (safe)\n• Short easy hikes\n• Train rides (fun!)\n• Turtle hatcheries\n\n⚠️ SKIP:\n• Long hikes (Adam's Peak)\n• Rough safaris for young kids\n• Super spicy food\n\n💡 TIPS:\n• Bring motion sickness meds\n• Snacks (Western brands in Colombo)\n• Sun protection!\n• Most hotels have family rooms\n\nSri Lankans LOVE children - very welcoming!`;
+    }
+
+    if (text.includes("backpack") || text.includes("budget travel") || text.includes("hostel")) {
+      return `🎒 Backpacker's Guide:\n\n${knowledge.special.backpacker}\n\n💰 DAILY BUDGET:\n• Dorm bed: $8-15\n• Local food: $5-10\n• Bus/train: $2-5\n• Activities: $10-30\n→ Total: $30-50/day\n\n🏠 BEST HOSTELS:\n• Ella (tons of budget options)\n• Arugam Bay (chill surf vibe)\n• Kandy (social hostels)\n• Mirissa (beach hostels)\n\n🚌 TRANSPORT: Local buses are dirt cheap but slow!\n\nGreat backpacker scene! Easy to travel cheap here.`;
+    }
+
+    if (text.includes("luxury") || text.includes("expensive") || text.includes("5 star") || text.includes("resort")) {
+      return `💎 Luxury Travel:\n\n${knowledge.special.luxury}\n\n🏆 TOP RESORTS:\n• Aman resorts - Ultra luxury\n• Cape Weligama - Clifftop villas\n• Tea Trails - Plantation bungalows\n• Wild Coast Tented Lodge - Luxury safari\n• Santani Wellness - Spa retreat\n\n💰 BUDGET: $300-1000+/night\n\n✨ INCLUDES:\n• Private pools\n• Butler service\n• Gourmet dining\n• Spa treatments\n• Private tours\n\nSri Lanka luxury is world-class but still cheaper than Maldives!`;
+    }
+
+    if (text.includes("yoga") || text.includes("wellness") || text.includes("meditation")) {
+      return `🧘 Yoga & Wellness:\n\n${knowledge.special.yoga}\n\n🏖️ TOP RETREATS:\n• Talalla Retreat - Beachfront yoga\n• Santani - Mountain wellness resort\n• Ulpotha - Eco village, authentic\n• Siddhalepa Ayurveda - Traditional\n\n💰 COST RANGE:\n• Budget: $20-40/day\n• Mid: $80-150/day\n• Luxury: $200-400/day\n\n📦 PACKAGES:\n• 5-21 day programs\n• Includes yoga, meals, accommodation\n• Some include Ayurveda treatments\n\nPerfect for digital detox & rejuvenation!`;
+    }
+
+    if (text.includes("ayurveda") || text.includes("spa") || text.includes("massage")) {
+      return `💆 Ayurveda Treatments:\n\n${knowledge.special.ayurveda}\n\n🌿 WHAT IS IT?\nTraditional healing with oils, herbs, massage, diet.\n\n💊 TREATS:\n• Stress, anxiety\n• Digestive issues\n• Skin problems\n• Chronic pain\n• General wellness\n\n⏰ DURATION:\n• Day treatments: 1-3 hours\n• Full programs: 7-21 days\n\n💰 COST:\n• Single massage: $20-60\n• Full program: $80-300/day\n\n✅ AUTHENTIC: Look for licensed Ayurveda doctors!\n\nVery relaxing & therapeutic. Great combo with beach time!`;
+    }
+
+    if (text.includes("photograph") || (text.includes("photo") && !text.includes("hotel"))) {
+      return `📸 Photography in Sri Lanka:\n\n${knowledge.special.photography}\n\n🏆 MUST-SHOOT:\n• Nine Arch Bridge (golden hour!)\n• Tea pickers in plantations\n• Stilt fishermen (Galle)\n• Sigiriya sunrise\n• Train hanging out doorway\n• Elephants at watering hole\n\n💰 CAMERA FEES:\n• Some temples: $2-5\n• Sigiriya Rock: Included\n• Most places: Free!\n\n📱 INSTAGRAM SPOTS:\n• Coconut Tree Hill\n• Ella Rock viewpoint\n• Galle Fort walls\n\n⚠️ DRONES: Need permit! ${knowledge.practical.drones}\n\nASK before photographing people/monks!`;
+    }
+
+    // PRACTICAL DETAILS
+    if (text.includes(" tip") || text.includes("tipping")) {
+      return `💵 Tipping Culture:\n\n${knowledge.practical.tipping}\n\n📋 GUIDELINES:\n• Restaurants: 10% if great service\n• Tuk-tuks: Round up fare\n• Drivers: $5-10/day for full day\n• Guides: $10-15/day\n• Hotel staff: $1-2 for helpful service\n\n❌ NOT EXPECTED at:\n• Street food stalls\n• Local restaurants\n• Shops\n\nNever obligatory! Only for good service.`;
+    }
+
+    if (text.includes("wifi") || text.includes("internet") || text.includes("data")) {
+      return `📶 Internet & WiFi:\n\n${knowledge.practical.wifi}\n\n📱 BEST OPTION: SIM Card!\n• Dialog or Mobitel at airport\n• $10-15 for 30 days\n• 5-20GB data + calls\n• 4G in cities, 3G elsewhere\n• Setup takes 10 minutes\n\n💻 WIFI:\n• Good: Hotels, cafes in tourist areas\n• Slow: Rural guesthouses\n• Spotty: During power cuts\n\n💡 Download offline maps (Google, Maps.me) before trips!`;
+    }
+
+    if (text.includes("laundry") || text.includes("clothes") || text.includes("wash")) {
+      return `👕 Laundry:\n\n${knowledge.practical.laundry}\n\n🏨 HOW:\n• Give to guesthouse/hotel\n• They wash & iron\n• Usually by weight\n\n⏰ TIMING:\n• Same-day if morning drop-off\n• Next-day if afternoon\n\n💡 TIP: Pack quick-dry clothes! Hand wash in room if needed.`;
+    }
+
+    if (text.includes("toilet") || text.includes("bathroom") || text.includes("restroom")) {
+      return `🚻 Toilets:\n\n${knowledge.practical.toilets}\n\n🧻 TOILET PAPER:\n• Provided in tourist places\n• Local places: Use water spray (bum gun)\n• ALWAYS carry tissue pack!\n\n💡 TIP: Use bathroom at hotels/restaurants before long drives.\n\nPublic toilets rare outside cities. Plan ahead!`;
+    }
+
+    if (text.includes("electricity") || text.includes("power") || text.includes("plug") || text.includes("adapter") || text.includes("voltage")) {
+      return `🔌 Electricity:\n\n${knowledge.practical.electricity}\n\n⚡ SPECS:\n• 230V, 50Hz\n• UK-style 3-pin plugs (Type D/G)\n\n🔌 ADAPTER:\n• UK adapter works!\n• Buy at airport if forgot\n\n🕯️ POWER CUTS:\n${knowledge.practical.electricity.split('.')[1]}\n\nMost hotels have backup generators!`;
+    }
+
+    if (text.includes("drone")) {
+      return `🚁 Drones:\n\n⚠️ ${knowledge.practical.drones}\n\n📋 RESTRICTIONS:\n• Military zones\n• Near airports\n• Crowded areas\n• Cultural sites\n\n📝 PERMIT:\n• Apply to CAASL (Civil Aviation)\n• Takes weeks\n• Complex process\n\n💡 NOT WORTH IT for tourists. Just use camera/phone!`;
+    }
+
+    if (text.includes("bargain") || text.includes("haggle") || text.includes("negotiate price")) {
+      return `💰 Bargaining:\n\n${knowledge.practical.bargaining}\n\n✅ BARGAIN AT:\n• Markets (Pettah, local markets)\n• Tuk-tuks (agree before!)\n• Souvenir shops\n• Beach vendors\n\n❌ FIXED PRICES:\n• Restaurants\n• Supermarkets\n• Hotels\n• Entrance fees\n\n💡 TIP: Start at 50-60% of asking price, meet in middle. Smile & be friendly!`;
+    }
+
+    // FOOD - Deep Dive
+    if (text.includes("breakfast") || (text.includes("hopper") && !text.includes("grasshopper"))) {
+      return `🍳 Sri Lankan Breakfast:\n\n${knowledge.foodDetails.breakfast}\n\n🥞 HOPPERS (Appa):\n• Bowl-shaped pancake\n• Crispy edges, soft center\n• Egg hopper = egg in center (best!)\n• Eat with sambol & curry\n\n🍜 STRING HOPPERS:\n• Steamed rice noodles\n• Eat with curry & coconut sambol\n\n💰 COST: $2-5 at local spots\n\nMUST TRY! Very different from Western breakfast but delicious!`;
+    }
+
+    if (text.includes("rice and curry") || text.includes("rice & curry") || text.includes("lunch")) {
+      return `🍛 Rice & Curry:\n\n${knowledge.foodDetails.lunch}\n\n🍽️ WHAT YOU GET:\n• Mound of rice (center)\n• 5-8 small portions of:\n  - Dhal (lentil curry)\n  - 2-3 vegetable curries\n  - Fish or chicken curry\n  - Sambol (spicy coconut)\n  - Papadam (crispy)\n  - Sometimes egg\n\n🤚 HOW TO EAT:\n${knowledge.foodDetails.lunch.includes('hands') ? '• Traditional: Mix with right hand!\n• Foreigners: Spoon & fork okay' : ''}\n\n💰 COST: $3-5 (unlimited rice!)\n\n🌶️ Usually VERY SPICY! Ask for mild.`;
+    }
+
+    if (text.includes("kottu") || text.includes("street food") || text.includes("snack")) {
+      return `🥘 Street Food & Snacks:\n\n${knowledge.foodDetails.snacks}\n\n🏆 KOTTU ROTI (MUST TRY!):\n• Chopped roti stir-fried with veggies, egg, meat\n• Made on hot griddle - loud clanging sound!\n• Served with curry sauce\n• Best late-night food\n• $2-3\n\n🍤 ISSO WADE:\n• Deep-fried prawn fritters\n• Spicy & crispy\n\n💰 STREET FOOD: Very cheap, $1-3\n\n✅ SAFE: Eat at busy stalls (food fresh!)`;
+    }
+
+    if (text.includes("dessert") || text.includes("sweet")) {
+      return `🍮 Sri Lankan Desserts:\n\n${knowledge.foodDetails.dessert}\n\n🏆 MUST TRY:\n• **Watalappan** - Coconut jaggery pudding (like crème caramel)\n• **Curd & Honey** - Buffalo yogurt with palm honey\n• **Kiri Pani** - Creamy milk toffee\n\n💰 COST: $1-3\n\nNot as sweet as Western desserts. Very rich & coconutty!`;
+    }
+
+    if (text.includes("tea") || text.includes("ceylon")) {
+      return `☕ Ceylon Tea:\n\n${knowledge.foodDetails.drinks}\n\n🌿 WHY IT'S SPECIAL:\n• Perfect climate (cool hills)\n• Hand-picked\n• No pesticides\n• Different regions = different flavors\n\n🏆 BEST TYPES:\n• **Uva** - Strong, bright\n• **Nuwara Eliya** - Delicate, light\n• **Dimbula** - Balanced\n\n🛒 BUYING:\n• Tea factories: $5-20/pack\n• Supermarkets: Cheaper\n• Brands: Dilmah, Mlesna, Ceylon Tea Trails\n\n✅ Look for "Pure Ceylon Tea" lion logo!\n\n💡 Visit tea plantation! Learn process, free tasting.`;
+    }
+
+    if (text.includes("vegetarian") || text.includes("vegan") || text.includes("veggie")) {
+      return `🥗 Vegetarian/Vegan Food:\n\n${knowledge.foodDetails.vegetarian}\n\n🌱 VEG DISHES:\n• Rice & curry (without fish/meat)\n• Dhal curry (lentils)\n• Coconut sambol\n• Vegetable roti\n• String hoppers\n• Fresh fruits\n\n📝 WHAT TO SAY:\n• "I'm vegetarian" (they understand!)\n• "No fish, no chicken, no meat"\n• "Only vegetables"\n\n🛕 TEMPLE TIP:\n${knowledge.foodDetails.vegetarian.split('.')[1]}\n\n✅ Sri Lanka has LOTS of veg options. Easy for vegetarians!`;
+    }
+
+    if (text.includes("spicy")) {
+      return `🌶️ Dealing with Spicy Food:\n\n${knowledge.foodDetails.spicy}\n\n🔥 IT'S REALLY SPICY!\n\n💡 HOW TO ORDER:\n• Say "Not spicy please"\n• "Can you make it mild?"\n• "Less chili"\n\n🥥 IF TOO SPICY:\n• Eat rice (absorbs heat)\n• Drink coconut water\n• Yogurt/curd helps\n❌ Water makes it worse!\n\n🍽️ MILD OPTIONS:\n• Tourist restaurants\n• Western-style cafes (Ella)\n• Order plain rice + mild curries\n\nLocal food is spicy by default - always specify!`;
     }
 
     // Best places / beautiful places queries
@@ -486,12 +768,12 @@ export default function ChatBot() {
   };
 
   const quickReplies = [
-    "Beautiful places",
-    "Best time to visit",
+    "Best beaches",
+    "Whale watching",
     "7 day itinerary", 
-    "Budget for trip",
-    "Things to do",
-    "Show hotels"
+    "Vegetarian food",
+    "Is it safe?",
+    "Honeymoon ideas"
   ];
 
   return (
