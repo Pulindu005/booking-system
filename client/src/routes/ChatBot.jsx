@@ -212,8 +212,40 @@ export default function ChatBot() {
   }, [messages]);
 
   const getSmartResponse = (userText) => {
-    const text = userText.toLowerCase();
+    const text = userText.toLowerCase().trim();
     
+    // GREETINGS - Handle basic conversation
+    const greetings = ["hi", "hello", "hey", "hii", "hiii", "helo", "hola", "good morning", "good afternoon", "good evening", "namaste", "ayubowan"];
+    if (greetings.some(g => text === g || text === g + "!" || text.startsWith(g + " ") || text.endsWith(" " + g))) {
+      const responses = [
+        "Hey there! 👋 Ready to explore Sri Lanka? Ask me anything - weather, places to visit, food, wildlife, budget tips... I'm here to help!",
+        "Hello! 🌴 Excited to help you plan your Sri Lanka adventure! What would you like to know?",
+        "Hi! 😊 I'm your Sri Lanka travel expert. Want to know about beaches, safaris, temples, food, or something else?",
+        "Ayubowan! 🙏 (That's 'hello' in Sinhala!) How can I help with your Sri Lanka trip today?"
+      ];
+      return responses[Math.floor(Math.random() * responses.length)];
+    }
+
+    // THANK YOU responses
+    if (text.includes("thank") || text.includes("thanks") || text === "thx" || text === "ty") {
+      return "You're very welcome! 😊 Feel free to ask anything else about Sri Lanka. I'm here to help make your trip amazing!";
+    }
+
+    // HOW ARE YOU / SMALL TALK
+    if (text.includes("how are you") || text.includes("how r u") || text.includes("hows it going") || text.includes("whats up") || text === "sup") {
+      return "I'm doing great, thanks for asking! 🌟 More importantly - how can I help you plan an incredible Sri Lanka trip? Got any questions about places, activities, or travel tips?";
+    }
+
+    // GOODBYE
+    if (text.includes("bye") || text.includes("goodbye") || text.includes("see you") || text.includes("good night") || text === "cya") {
+      return "Safe travels! 🌏✈️ If you need any more Sri Lanka tips before your trip, I'm always here. Have an amazing adventure! 🌴";
+    }
+
+    // WHO ARE YOU
+    if (text.includes("who are you") || text.includes("what are you") || text.includes("your name")) {
+      return "I'm your AI Sri Lanka travel expert! 🤖🌴 I've been trained on everything about Sri Lanka - from the best beaches and wildlife safaris to practical tips like visas, food, safety, and avoiding scams. Think of me as your personal travel guide who never sleeps! What would you like to explore?";
+    }
+
     // Extract month if mentioned
     const months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
     const monthMatch = months.find(m => text.includes(m) || text.includes(m.slice(0, 3)));
@@ -729,6 +761,45 @@ export default function ChatBot() {
              "• Kandy to Ella = Most scenic!\n" +
              "• Book tickets in advance\n\n" +
              "Want to see our vehicle rentals?";
+    }
+
+    // SHORT RESPONSES - Ok, cool, nice, wow, etc. (conversational acknowledgments)
+    const shortResponses = ["ok", "okay", "k", "kk", "cool", "nice", "great", "good", "awesome", "wow", "ohh", "oh", "i see", "got it", "alright", "perfect", "yeah", "yes", "yup", "uh huh"];
+    if (shortResponses.includes(text) || shortResponses.includes(text.replace(/[!.]+$/, ''))) {
+      return "Anything else you'd like to know about Sri Lanka? 😊\n\nI can help with:\n• Places to visit\n• Weather & best time\n• Budget & costs\n• Food recommendations\n• Safety & health tips\n• Activities & wildlife\n\nJust ask away!";
+    }
+
+    // HELP / I DON'T KNOW WHAT TO ASK
+    if (text.includes("help") || text.includes("dont know") || text.includes("don't know") || text.includes("not sure") || text === "?") {
+      return "No worries! Let me help you get started:\n\n" +
+             "🗓️ **Planning Stage:**\n• When are you going?\n• How many days?\n• What's your budget?\n\n" +
+             "🎯 **Interest Based:**\n• Love beaches? Ask about best beaches!\n• Wildlife fan? Ask about safaris!\n• Foodie? Ask about Sri Lankan cuisine!\n• Adventure seeker? Ask about hiking, surfing, diving!\n\n" +
+             "📋 **Practical Questions:**\n• \"Do I need a visa?\"\n• \"Is it safe?\"\n• \"How much does it cost?\"\n• \"Best time to visit?\"\n\n" +
+             "Just type naturally - ask me anything! 😊";
+    }
+
+    // CAN YOU / ARE YOU ABLE TO
+    if (text.startsWith("can you") || text.startsWith("are you able")) {
+      return "Yes! I can help you with literally everything about Sri Lanka travel:\n\n" +
+             "✅ Trip planning & itineraries\n" +
+             "✅ Weather forecasts by month\n" +
+             "✅ Best places for your interests\n" +
+             "✅ Budget estimates & costs\n" +
+             "✅ Food & restaurant tips\n" +
+             "✅ Wildlife safaris & whale watching\n" +
+             "✅ Beaches, temples, hiking, diving\n" +
+             "✅ Safety, health, visas, SIM cards\n" +
+             "✅ Avoid scams, language tips\n" +
+             "✅ Special trips (honeymoon, family, solo)\n\n" +
+             "Go ahead and ask - I'm trained on 50+ topics! 🚀";
+    }
+
+    // I WANT TO / I'M INTERESTED IN / I LIKE
+    if (text.startsWith("i want") || text.startsWith("i'm interested") || text.startsWith("im interested") || text.startsWith("i like") || text.startsWith("i love")) {
+      if (text.includes("plan") || text.includes("trip") || text.includes("visit")) {
+        return "Awesome! Let's plan your Sri Lanka trip! 🎉\n\nTell me:\n1️⃣ When are you going? (Which month?)\n2️⃣ How many days do you have?\n3️⃣ What interests you most?\n   • Beaches & relaxation\n   • Culture & temples  \n   • Wildlife & nature\n   • Adventure & hiking\n   • Food & local experiences\n\nShare these and I'll create a perfect itinerary for you!";
+      }
+      return "Great! I'd love to help! Tell me more about what you're interested in and I'll give you specific recommendations for Sri Lanka! 😊";
     }
 
     // Default helpful response
