@@ -4,6 +4,13 @@ A full-stack booking platform for hotels, villas, and vehicle rentals in Sri Lan
 
 ## Features
 
+- **AI Trip Planner**: Intelligent chatbot that provides personalized recommendations based on travel dates, duration, interests, and budget
+  - Month-by-month weather forecasts
+  - Custom itineraries (3-day, 7-day, 10-14 day plans)
+  - Location-specific guides (Colombo, Kandy, Ella, Galle, Mirissa, Sigiriya, Nuwara Eliya)
+  - Budget planning and cost estimates
+  - Travel essentials (visa, currency, SIM cards, safety tips, packing lists)
+  - Activity recommendations (wildlife safaris, cultural sites, beaches, adventure)
 - **Browse Listings**: Search and filter hotels, villas, cars, bikes, and three-wheelers
 - **Booking Flow**: View details, check availability, and book accommodations or vehicles
 - **Nearby Places**: Discover beautiful places to visit near your booking
