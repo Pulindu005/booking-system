@@ -953,14 +953,59 @@ export default function ChatBot() {
     setInput("");
     setIsLoading(true);
 
-    // Get intelligent response from built-in knowledge base
-    const response = getSmartResponse(userMessage.text);
-    
-    // Simulate natural typing delay
-    setTimeout(() => {
-      addBotMessage(response, { animate: true });
+    try {
+      // Try to use real AI first
+      const response = await fetch("http://localhost:4000/api/chat/stream", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ 
+          message: userMessage.text,
+          history: nextMessages.slice(-6).map(m => ({
+            role: m.sender === "user" ? "user" : "assistant",
+            content: m.text
+          }))
+        })
+      });
+
+      if (response.ok && response.body) {
+        // Stream the AI response
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+        const messageId = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        
+        setMessages(prev => [...prev, { 
+          id: messageId, 
+          sender: "bot", 
+          text: "", 
+          time: new Date() 
+        }]);
+
+        let fullText = "";
+        while (true) {
+          const { value, done } = await reader.read();
+          if (done) break;
+          const chunk = decoder.decode(value, { stream: true });
+          fullText += chunk;
+          setMessages(prev => prev.map(msg => 
+            msg.id === messageId ? { ...msg, text: fullText } : msg
+          ));
+        }
+      } else {
+        // Fallback to built-in responses
+        const fallbackResponse = getSmartResponse(userMessage.text);
+        setTimeout(() => {
+          addBotMessage(fallbackResponse, { animate: true });
+        }, 300);
+      }
+    } catch (error) {
+      // If server is not running, use built-in responses
+      const fallbackResponse = getSmartResponse(userMessage.text);
+      setTimeout(() => {
+        addBotMessage(fallbackResponse, { animate: true });
+      }, 300);
+    } finally {
       setIsLoading(false);
-    }, 500);
+    }
   };
 
   const handleKeyPress = (e) => {

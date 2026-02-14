@@ -3,8 +3,13 @@ import cors from "cors";
 import dotenv from "dotenv";
 import fs from "fs/promises";
 import path from "path";
+import { fileURLToPath } from "url";
 
-dotenv.config();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Load .env from server directory
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -343,5 +348,11 @@ app.post("/api/chat/stream", async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on ${port}`);
+  console.log(`✅ Server running on http://localhost:${port}`);
+  console.log(`✅ OpenAI API Key: ${process.env.OPENAI_API_KEY ? 'LOADED ✓' : 'MISSING ✗'}`);
+  if (process.env.OPENAI_API_KEY) {
+    console.log(`🤖 ChatGPT-level AI responses enabled!`);
+  } else {
+    console.log(`⚠️  Using fallback responses only`);
+  }
 });
