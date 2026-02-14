@@ -251,6 +251,26 @@ export default function ChatBot() {
   const getSmartResponse = (userText) => {
     const text = userText.toLowerCase().trim();
     
+    // TRIP PLANNING - Handle typos like "plane" instead of "plan"
+    if (text.includes("plan my trip") || text.includes("plane my trip") || text.includes("plan a trip") || 
+        text.includes("plane a trip") || text.includes("help me plan") || text.includes("planning a trip") ||
+        text === "plan trip" || text === "plane trip" || text.includes("organize my trip") ||
+        text.includes("create itinerary") || text.includes("make itinerary")) {
+      return "Awesome! Let's plan your perfect Sri Lanka trip! 🎉✨\n\n" +
+             "To create the best itinerary for you, tell me:\n\n" +
+             "1️⃣ **When are you visiting?** (Which month? This affects weather & activities)\n" +
+             "2️⃣ **How long?** (3 days? 1 week? 2 weeks?)\n" +
+             "3️⃣ **What interests you most?**\n" +
+             "   🏖️ Beaches & relaxation\n" +
+             "   🏛️ Culture & temples\n" +
+             "   🐘 Wildlife & safaris\n" +
+             "   ⛰️ Adventure & hiking\n" +
+             "   🍛 Food & local experiences\n" +
+             "   💑 Romantic honeymoon\n\n" +
+             "4️⃣ **Budget range?** (Budget/Mid-range/Luxury)\n\n" +
+             "Share these details and I'll create a customized itinerary just for you! 🗺️";
+    }
+    
     // GREETINGS - Handle basic conversation
     const greetings = ["hi", "hello", "hey", "hii", "hiii", "helo", "hola", "good morning", "good afternoon", "good evening", "namaste", "ayubowan"];
     if (greetings.some(g => text === g || text === g + "!" || text.startsWith(g + " ") || text.endsWith(" " + g))) {
@@ -831,23 +851,63 @@ export default function ChatBot() {
              "Go ahead and ask - I'm trained on 50+ topics! 🚀";
     }
 
-    // I WANT TO / I'M INTERESTED IN / I LIKE
-    if (text.startsWith("i want") || text.startsWith("i'm interested") || text.startsWith("im interested") || text.startsWith("i like") || text.startsWith("i love")) {
-      if (text.includes("plan") || text.includes("trip") || text.includes("visit")) {
-        return "Awesome! Let's plan your Sri Lanka trip! 🎉\n\nTell me:\n1️⃣ When are you going? (Which month?)\n2️⃣ How many days do you have?\n3️⃣ What interests you most?\n   • Beaches & relaxation\n   • Culture & temples  \n   • Wildlife & nature\n   • Adventure & hiking\n   • Food & local experiences\n\nShare these and I'll create a perfect itinerary for you!";
+    // I WANT TO / I'M INTERESTED IN / I LIKE / I NEED
+    if (text.startsWith("i want") || text.startsWith("i wanna") || text.startsWith("i'd like") || 
+        text.startsWith("i'm interested") || text.startsWith("im interested") || 
+        text.startsWith("i like") || text.startsWith("i love") || text.startsWith("i need")) {
+      
+      if (text.includes("plan") || text.includes("plane") || text.includes("trip") || text.includes("visit") || text.includes("itinerary")) {
+        return "Perfect! Let's create your dream Sri Lanka itinerary! 🗺️✨\n\n" +
+               "Please share:\n" +
+               "1️⃣ **When?** (Which month are you visiting?)\n" +
+               "2️⃣ **Duration?** (How many days?)\n" +
+               "3️⃣ **Your interests?**\n" +
+               "   🏖️ Beaches & water activities\n" +
+               "   🏛️ Ancient temples & culture\n" +
+               "   🐘 Wildlife safaris\n" +
+               "   ⛰️ Hiking & mountains\n" +
+               "   🍛 Food & cooking\n" +
+               "   💑 Romantic experiences\n\n" +
+               "4️⃣ **Budget?** (Backpacker/Moderate/Luxury)\n\n" +
+               "The more you tell me, the better I can customize your perfect trip! 🌟";
       }
-      return "Great! I'd love to help! Tell me more about what you're interested in and I'll give you specific recommendations for Sri Lanka! 😊";
+      
+      if (text.includes("beach")) {
+        return "🏖️ Beach lover here! Sri Lanka has stunning beaches:\n\n" +
+               "**West/South Coast** (Nov-Apr):\n• Unawatuna - Family-friendly\n• Mirissa - Whale watching\n• Hikkaduwa - Snorkeling\n• Bentota - Water sports\n\n" +
+               "**East Coast** (May-Sep):\n• Arugam Bay - Surfing paradise\n• Trincomalee - Pristine & quiet\n\n" +
+               "What type of beach vibe are you looking for? Party, romantic, or family-friendly?";
+      }
+      
+      if (text.includes("adventure") || text.includes("hiking") || text.includes("trek")) {
+        return "⛰️ Adventure seeker! You're gonna love Sri Lanka:\n\n" +
+               "🥾 **Top Hikes**:\n• Adam's Peak - Sacred sunrise climb (4-6 hrs)\n• Ella Rock - Stunning 360° views (2-3 hrs)\n• Knuckles Range - Multi-day treks\n• Horton Plains - World's End cliff (3-4 hrs)\n\n" +
+               "🌊 **Water Adventures**:\n• White water rafting (Kitulgala)\n• Surfing (Arugam Bay, Weligama)\n• Diving (Trincomalee, Hikkaduwa)\n\n" +
+               "Which sounds most exciting to you?";
+      }
+      
+      if (text.includes("wildlife") || text.includes("safari") || text.includes("elephant") || text.includes("leopard")) {
+        return "🐘🐆 Wildlife enthusiast! Perfect choice:\n\n" +
+               "**Top Parks**:\n• Yala NP - Leopards (#1 density worldwide!)\n• Udawalawe NP - 100+ elephants guaranteed\n• Minneriya - \"The Gathering\" Aug-Sep\n• Wilpattu - Sloth bears & remote wilderness\n\n" +
+               "💵 Safari cost: $40-80 per person\n⏰ Best: Early morning (6am)\n🦟 Bring: Binoculars, sunscreen, neutral clothes\n\n" +
+               "Want details on a specific park?";
+      }
+      
+      return "Awesome! I'd love to help! 😊 Tell me more details and I'll give you personalized Sri Lanka recommendations!";
     }
 
-    // Default helpful response
-    return "I'm here to help plan your perfect Sri Lanka trip! 🌴\n\n" +
-           "Try asking me:\n" +
-           "• \"Weather in February\" or \"Best time to visit\"\n" +
-           "• \"7 day itinerary\" or \"What to do in Kandy\"\n" +
-           "• \"How much does it cost?\" or \"Budget for 2 weeks\"\n" +
-           "• \"Do I need a visa?\" or \"Is it safe?\"\n" +
-           "• \"Where to stay in Ella?\" or \"Show me hotels\"\n" +
-           "• \"Best food to try\" or \"Activities to do\"\n\n" +
+    // Default helpful response with personality
+    return "Hey! I'm your Sri Lanka travel expert 🌴🤖\n\n" +
+           "**Popular questions I crush:**\n" +
+           "💬 \"Plan my trip\" - Custom itineraries\n" +
+           "🌤️ \"Weather in [month]\" - Best time to visit\n" +
+           "🏖️ \"Best beaches\" - All coastal gems\n" +
+           "🐘 \"Where to see elephants\" - Safari guides\n" +
+           "🍛 \"What food to try\" - Culinary tips\n" +
+           "💵 \"How much does it cost\" - Budget planning\n" +
+           "✈️ \"Do I need a visa\" - Travel essentials\n" +
+           "🏨 \"Where to stay in [city]\" - Accommodation\n\n" +
+           "Just ask naturally - I understand typos too! 😉\n\n" +
            "What would you like to know?";
   };
 
@@ -910,12 +970,12 @@ export default function ChatBot() {
   };
 
   const quickReplies = [
+    "Plan my trip",
     "Best beaches",
-    "Whale watching",
     "7 day itinerary", 
+    "Where to see leopards",
     "Vegetarian food",
-    "Is it safe?",
-    "Honeymoon ideas"
+    "Is it safe?"
   ];
 
   return (
