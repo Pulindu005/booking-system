@@ -4,13 +4,20 @@ A full-stack booking platform for hotels, villas, and vehicle rentals in Sri Lan
 
 ## Features
 
-- **AI Trip Planner**: Intelligent chatbot that provides personalized recommendations based on travel dates, duration, interests, and budget
+- **AI Trip Planner**: Intelligent chatbot with built-in Sri Lanka travel expertise (no API required!)
+  - 50+ travel topics covering every aspect of Sri Lankan tourism
   - Month-by-month weather forecasts
   - Custom itineraries (3-day, 7-day, 10-14 day plans)
-  - Location-specific guides (Colombo, Kandy, Ella, Galle, Mirissa, Sigiriya, Nuwara Eliya)
+  - Location-specific guides (Colombo, Kandy, Ella, Galle, Mirissa, Sigiriya, Nuwara Eliya, Arugam Bay)
   - Budget planning and cost estimates
   - Travel essentials (visa, currency, SIM cards, safety tips, packing lists)
   - Activity recommendations (wildlife safaris, cultural sites, beaches, adventure)
+  - Food & restaurant guides
+  - Photography tips and best spots
+  - Language phrases & cultural etiquette
+  - Yoga retreats & wellness centers
+  - Safety tips & scam awareness
+  - Works 100% offline - all intelligence built-in!
 - **Browse Listings**: Search and filter hotels, villas, cars, bikes, and three-wheelers
 - **Booking Flow**: View details, check availability, and book accommodations or vehicles
 - **Nearby Places**: Discover beautiful places to visit near your booking
@@ -43,13 +50,15 @@ Start the client (React):
 npm run dev
 ```
 
-Start the server (Express) in a new terminal:
+**Note:** The AI chatbot works entirely in the browser with no backend required! The Express server is optional and only needed for future booking/authentication features.
+
+Optionally start the server (Express) in a new terminal:
 ```bash
 npm run dev:server
 ```
 
 The client runs on http://localhost:5173/  
-The server runs on http://localhost:4000/
+The server runs on http://localhost:4000/ (optional)
 
 ## Build (client)
 ```bash

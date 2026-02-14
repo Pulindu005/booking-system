@@ -220,14 +220,6 @@ export default function ChatBot() {
   });
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [userContext, setUserContext] = useState({
-    month: null,
-    days: null,
-    interests: [],
-    budget: null
-  });
-  const apiBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:4000";
-  const clientIdRef = useRef(null);
   const messagesEndRef = useRef(null);
   const typingTimerRef = useRef(null);
 
@@ -255,27 +247,7 @@ export default function ChatBot() {
     };
   }, []);
 
-  const ensureClientId = () => {
-    if (clientIdRef.current) return clientIdRef.current;
-    try {
-      const existing = localStorage.getItem("tripPlannerClientId");
-      if (existing) {
-        clientIdRef.current = existing;
-        return existing;
-      }
-      const generated = typeof crypto !== "undefined" && crypto.randomUUID
-        ? crypto.randomUUID()
-        : `client-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-      localStorage.setItem("tripPlannerClientId", generated);
-      clientIdRef.current = generated;
-      return generated;
-    } catch {
-      const fallback = `client-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-      clientIdRef.current = fallback;
-      return fallback;
-    }
-  };
-
+  // COMPREHENSIVE SMART RESPONSE SYSTEM - No API needed!
   const getSmartResponse = (userText) => {
     const text = userText.toLowerCase().trim();
     
@@ -879,15 +851,6 @@ export default function ChatBot() {
            "What would you like to know?";
   };
 
-  const buildHistory = (messagesList) =>
-    messagesList
-      .filter((msg) => msg.sender === "user" || msg.sender === "bot")
-      .slice(-8)
-      .map((msg) => ({
-        role: msg.sender === "user" ? "user" : "assistant",
-        content: msg.text
-      }));
-
   const addBotMessage = (fullText, { animate = true } = {}) => {
     const messageId = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
     const baseMessage = { id: messageId, sender: "bot", text: "", time: new Date() };
@@ -921,24 +884,6 @@ export default function ChatBot() {
     }, 12);
   };
 
-  const startBotStream = () => {
-    const messageId = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
-    const baseMessage = { id: messageId, sender: "bot", text: "", time: new Date() };
-    setMessages((prev) => [...prev, baseMessage]);
-    return messageId;
-  };
-
-  const appendToBotMessage = (messageId, chunk) => {
-    if (!chunk) return;
-    setMessages((prev) =>
-      prev.map((msg) =>
-        msg.id === messageId
-          ? { ...msg, text: msg.text + chunk }
-          : msg
-      )
-    );
-  };
-
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -948,38 +893,14 @@ export default function ChatBot() {
     setInput("");
     setIsLoading(true);
 
-    const clientId = ensureClientId();
-    const history = buildHistory(nextMessages);
-    const botMessageId = startBotStream();
-
-    try {
-      const response = await fetch(`${apiBaseUrl}/api/chat/stream`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage.text, history, clientId })
-      });
-
-      if (!response.ok || !response.body) {
-        const fallback = `AI server is unavailable right now, so here's a built-in answer:\n\n${getSmartResponse(userMessage.text)}`;
-        appendToBotMessage(botMessageId, fallback);
-        return;
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { value, done } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        appendToBotMessage(botMessageId, chunk);
-      }
-    } catch (error) {
-      const fallback = `I couldn't reach the AI server, so here's a built-in answer:\n\n${getSmartResponse(userMessage.text)}`;
-      appendToBotMessage(botMessageId, fallback);
-    } finally {
+    // Get intelligent response from built-in knowledge base
+    const response = getSmartResponse(userMessage.text);
+    
+    // Simulate natural typing delay
+    setTimeout(() => {
+      addBotMessage(response, { animate: true });
       setIsLoading(false);
-    }
+    }, 500);
   };
 
   const handleKeyPress = (e) => {
