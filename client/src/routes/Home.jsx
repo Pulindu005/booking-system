@@ -52,7 +52,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="space-y-4">
+      <div className="section">
         <h2 className="font-serif text-2xl text-sand-900">Choose your journey</h2>
         <div className="grid gap-4 md:grid-cols-3">
           <article className="rounded-2xl border border-sand-200 bg-sand-50 p-5 shadow-lift">
@@ -67,12 +67,15 @@ export default function Home() {
               Find cars, bikes, and three wheelers with trusted hosts.
             </p>
           </article>
-          <article className="rounded-2xl border border-sand-200 bg-sand-50 p-5 shadow-lift">
-            <h3 className="text-lg font-semibold">Nearby places</h3>
-            <p className="mt-2 text-sm text-sand-700">
-              Help guests explore beaches, waterfalls, and local food spots.
+          <Link
+            to="/trip-planner"
+            className="group rounded-2xl border border-sand-200 bg-gradient-to-br from-sand-900 to-sand-800 p-5 shadow-lift transition hover:shadow-soft"
+          >
+            <h3 className="text-lg font-semibold text-sand-50">AI Trip Planner 🤖</h3>
+            <p className="mt-2 text-sm text-sand-200">
+              Get personalized itineraries and recommendations for your Sri Lanka adventure.
             </p>
-          </article>
+          </Link>
         </div>
       </div>
 

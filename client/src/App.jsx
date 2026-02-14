@@ -4,6 +4,7 @@ import Listings from "./routes/Listings.jsx";
 import ListingDetail from "./routes/ListingDetail.jsx";
 import Login from "./routes/Login.jsx";
 import Host from "./routes/Host.jsx";
+import ChatBot from "./routes/ChatBot.jsx";
 
 export default function App() {
   return (
@@ -19,7 +20,10 @@ export default function App() {
             </Link>
             <Link className="hover:text-sand-700" to="/listings">
               Browse
+            </Link>trip-planner">
+              Trip Planner 🤖
             </Link>
+            <Link className="hover:text-sand-700" to="/
             <Link className="hover:text-sand-700" to="/login">
               Login
             </Link>
@@ -34,6 +38,7 @@ export default function App() {
       </header>
       <main className="mx-auto max-w-6xl px-6 py-10">
         <Routes>
+          <Route path="/trip-planner" element={<ChatBot />} />
           <Route path="/" element={<Home />} />
           <Route path="/listings" element={<Listings />} />
           <Route path="/listing/:id" element={<ListingDetail />} />
