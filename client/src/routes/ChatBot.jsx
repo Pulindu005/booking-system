@@ -122,6 +122,37 @@ export default function ChatBot() {
              `How many days do you have?`;
     }
 
+    // Best places / beautiful places queries
+    if (text.includes("beautiful") || text.includes("best place") || text.includes("top place") || 
+        text.includes("must visit") || text.includes("must see") || text.includes("worth visiting") ||
+        text.includes("where should i go") || text.includes("where to go") || text.includes("recommend place")) {
+      return "🏆 Sri Lanka's Most Beautiful Places:\n\n" +
+             "🏖️ BEACHES:\n" +
+             "• Unawatuna - Gorgeous bay, safe swimming\n" +
+             "• Mirissa - Whale watching & stunning sunsets\n" +
+             "• Arugam Bay - Surfer's paradise\n" +
+             "• Tangalle - Peaceful & pristine\n\n" +
+             "⛰️ HILL COUNTRY:\n" +
+             "• Ella - Nine Arch Bridge, hikes, tea plantations (MUST!)\n" +
+             "• Nuwara Eliya - Little England vibes\n" +
+             "• Adam's Peak - Sacred sunrise hike\n\n" +
+             "🏛️ CULTURAL:\n" +
+             "• Sigiriya Rock - Ancient fortress (UNESCO)\n" +
+             "• Galle Fort - Dutch colonial charm\n" +
+             "• Temple of the Tooth, Kandy - Sacred Buddhist site\n" +
+             "• Polonnaruwa - Ancient city ruins\n\n" +
+             "🐘 WILDLIFE:\n" +
+             "• Yala National Park - Leopards & elephants\n" +
+             "• Udawalawe - Elephant orphanage\n" +
+             "• Minneriya - Elephant gathering (Aug-Sep)\n\n" +
+             "📸 INSTAGRAM SPOTS:\n" +
+             "• Ella's Nine Arch Bridge\n" +
+             "• Coconut Tree Hill, Mirissa\n" +
+             "• Train ride Kandy to Ella\n" +
+             "• Stilt fishermen in Galle\n\n" +
+             "Want details on any specific place?";
+    }
+
     // Check for specific locations
     const locationKeys = Object.keys(knowledge.locations);
     const locationMatch = locationKeys.find(loc => text.includes(loc));
@@ -136,6 +167,26 @@ export default function ChatBot() {
              `Want hotel recommendations? Type 'hotels' or 'browse'`;
     }
 
+    // Best time to visit
+    if (text.includes("best time") || text.includes("when to visit") || text.includes("when should i go") || text.includes("ideal time")) {
+      return "📆 Best Time to Visit Sri Lanka:\n\n" +
+             "🌟 PEAK SEASON (Dec-March):\n" +
+             "• Perfect weather: 25-30°C, sunny & dry\n" +
+             "• Great for west/south coast beaches\n" +
+             "• Cultural sites & hill country excellent\n" +
+             "• Most expensive but worth it!\n\n" +
+             "🌤️ SHOULDER (April, Nov):\n" +
+             "• Good weather, fewer crowds\n" +
+             "• Better prices\n" +
+             "• Some rain possible\n\n" +
+             "🌧️ MONSOON (May-September):\n" +
+             "• Southwest coast rainy\n" +
+             "• BUT: East coast (Arugam Bay, Trinco) is perfect!\n" +
+             "• Lowest prices\n\n" +
+             "💡 Pro tip: Sri Lanka has two coasts - one is always good!\n\n" +
+             "Which month are you thinking?";
+    }
+
     // Weather/forecast queries
     if (text.includes("weather") || text.includes("forecast") || text.includes("temperature") || 
         text.includes("rain") || text.includes("climate") || text.includes("hot") || text.includes("cold")) {
@@ -144,6 +195,67 @@ export default function ChatBot() {
              "🌞 Dry Season (Dec-Mar): Best for west/south coast & cultural sites\n" +
              "🌧️ Monsoon (May-Sep): Southwest gets rain, but east coast is great!\n\n" +
              "Which month are you visiting? Just type the month name.";
+    }
+
+    // Train queries
+    if (text.includes("train") || text.includes("railway") || text.includes("scenic ride")) {
+      return "🚂 Sri Lanka's Famous Train Rides:\n\n" +
+             "🏆 KANDY TO ELLA (Most scenic!):\n" +
+             "• Duration: 6-7 hours\n" +
+             "• Views: Tea plantations, mountains, tunnels\n" +
+             "• Cost: $1-3 (2nd/3rd class), $8 (1st class)\n" +
+             "• Tip: Book 1st class in advance, or ride in doorway (safe!)\n\n" +
+             "🌊 COLOMBO TO GALLE (Coastal):\n" +
+             "• Duration: 2.5 hours\n" +
+             "• Views: Indian Ocean coastline\n" +
+             "• Cost: $1-2\n\n" +
+             "📸 PRO TIPS:\n" +
+             "• Sit on right side Kandy→Ella\n" +
+             "• Book tickets at train stations day before\n" +
+             "• Or buy on train (conductor)\n" +
+             "• Open windows = best photos!\n\n" +
+             "Want to know what to do in Ella?";
+    }
+
+    // Specific attractions
+    if (text.includes("sigiriya") || text.includes("lion rock")) {
+      return "🏔️ Sigiriya Rock Fortress:\n\n" +
+             "UNESCO World Heritage Site - ancient palace on 200m rock!\n\n" +
+             "⏰ Time needed: 2-3 hours (1200 steps)\n" +
+             "💵 Entrance: $30\n" +
+             "🕐 Best time: Early morning (6am) or late afternoon (4pm) - avoid heat!\n" +
+             "📸 Views: 360° panorama of jungle\n\n" +
+             "NEARBY:\n" +
+             "• Pidurangala Rock - Free, better views of Sigiriya!\n" +
+             "• Minneriya Safari - Elephant gathering\n" +
+             "• Dambulla Cave Temple\n\n" +
+             "Stay in Sigiriya village, check our hotel listings!";
+    }
+
+    if (text.includes("adam's peak") || text.includes("adams peak") || text.includes("sri pada")) {
+      return "⛰️ Adam's Peak (Sri Pada):\n\n" +
+             "Sacred mountain - 2,243m sunrise pilgrimage hike!\n\n" +
+             "⏰ Duration: 4-6 hours round trip\n" +
+             "🌅 Start: 2-3am for sunrise\n" +
+             "📅 Season: Dec-May (dry season only!)\n" +
+             "💪 Difficulty: Moderate - 5,500 steps\n" +
+             "💵 Free entry\n\n" +
+             "TIPS:\n" +
+             "• Bring flashlight & warm jacket\n" +
+             "• Rest stops sell tea/snacks\n" +
+             "• Sacred site - dress modestly\n" +
+             "• Start from Dalhousie village\n\n" +
+             "Amazing spiritual experience! Worth the early wake-up.";
+    }
+
+    if (text.includes("how long") || text.includes("how many days") || text.includes("duration")) {
+      return "⏳ How Long to Stay in Sri Lanka:\n\n" +
+             "⚡ 3-4 days: Colombo + one area (Galle or Kandy)\n" +
+             "✅ 7 days: Cultural triangle + beaches (recommended!)\n" +
+             "🏆 10-14 days: Full experience - culture, hills, wildlife, beaches\n" +
+             "🌴 2-3 weeks: Relaxed pace, off-beaten-path spots\n\n" +
+             "Most visitors spend 7-10 days.\n\n" +
+             "How many days do you have? I'll create a perfect itinerary!";
     }
 
     // Duration-based itineraries
@@ -223,14 +335,66 @@ export default function ChatBot() {
              "What's your budget level?";
     }
 
+    // Surfing
+    if (text.includes("surf") || text.includes("wave")) {
+      return "🏄 Surfing in Sri Lanka:\n\n" +
+             "🌊 BEST SPOTS:\n" +
+             "• Arugam Bay - World-class (May-Sep)\n" +
+             "• Weligama - Perfect for beginners!\n" +
+             "• Hikkaduwa - Good waves, reef breaks\n" +
+             "• Mirissa - Mellow waves\n\n" +
+             "💵 COSTS:\n" +
+             "• Board rental: $5-10/day\n" +
+             "• Lessons: $20-40 (2 hours)\n\n" +
+             "📅 SEASONS:\n" +
+             "• West/South coast: Nov-Apr\n" +
+             "• East coast (Arugam): May-Sep\n\n" +
+             "Weligama is best for learning - shallow, safe bay!";
+    }
+
+    // Diving/snorkeling
+    if (text.includes("dive") || text.includes("diving") || text.includes("snorkel") || text.includes("underwater")) {
+      return "🤿 Diving & Snorkeling:\n\n" +
+             "🐠 TOP SPOTS:\n" +
+             "• Hikkaduwa - Coral reefs, turtles\n" +
+             "• Pigeon Island (Trinco) - Best reefs!\n" +
+             "• Unawатuna - Turtles, good for beginners\n" +
+             "• Kalpitiya - Whale sharks, dolphins\n\n" +
+             "💵 COSTS:\n" +
+             "• Snorkel gear: $5/day\n" +
+             "• Dive (certified): $40-60\n" +
+             "• PADI course: $300-400\n\n" +
+             "📅 Best: Dec-Apr (calm seas)\n\n" +
+             "See sea turtles everywhere!";
+    }
+
     // Activities
-    if (text.includes("do") || text.includes("activities") || text.includes("things") || text.includes("safari") || text.includes("whale")) {
+    if (text.includes("what to do") || text.includes("activities") || text.includes("things to do") || 
+        text.includes("safari") || text.includes("whale") || text.includes("adventure")) {
       return "🎯 Must-Do Activities:\n\n" +
              "🐘 Wildlife:\n• Safari at Yala/Udawalawe (elephants, leopards)\n• Whale watching in Mirissa (Nov-Apr)\n\n" +
              "🏞️ Nature & Adventure:\n• Climb Sigiriya Rock\n• Hike Little Adam's Peak (Ella)\n• Visit tea plantations\n• Waterfall hunting\n\n" +
              "🏛️ Culture:\n• Temple of the Tooth (Kandy)\n• Galle Fort walk\n• Traditional dance shows\n\n" +
              "🏄 Beach & Water:\n• Surf lessons (Arugam Bay, Weligama)\n• Snorkeling\n• Beach hopping\n\n" +
              "Which interests you?";
+    }
+
+    // Budget queries
+    if (text.includes("budget") || text.includes("cost") || text.includes("price") || text.includes("expensive") || text.includes("cheap")) {
+      return "💰 Daily Budget Per Person:\n\n" +
+             "🏕️ Budget: $30-50\n" +
+             "• Guesthouses: $15-25\n" +
+             "• Local food: $5-10\n" +
+             "• Local transport: $5-10\n\n" +
+             "🏨 Mid-Range: $70-120\n" +
+             "• Nice hotels: $40-70\n" +
+             "• Mix of restaurants: $15-25\n" +
+             "• Private car: $40-50\n\n" +
+             "💎 Luxury: $200+\n" +
+             "• 5-star resorts: $150+\n" +
+             "• Fine dining: $30-50\n" +
+             "• Private guides: $50+\n\n" +
+             "What's your budget level?";
     }
 
     // Food
@@ -322,12 +486,12 @@ export default function ChatBot() {
   };
 
   const quickReplies = [
-    "Weather in January",
+    "Beautiful places",
+    "Best time to visit",
     "7 day itinerary", 
     "Budget for trip",
     "Things to do",
-    "Show hotels",
-    "Do I need visa?"
+    "Show hotels"
   ];
 
   return (
