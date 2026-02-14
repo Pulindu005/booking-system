@@ -187,21 +187,49 @@ const knowledge = {
 };
 
 export default function ChatBot() {
-  const [messages, setMessages] = useState([
-    { 
-      sender: "bot", 
-      text: "Hello! 👋 I'm your AI Sri Lanka travel expert - trained on everything you need!\n\nAsk me ANYTHING about:\n✈️ Planning (itineraries, weather, best time)\n🏖️ Places (beaches, waterfalls, temples, wildlife)\n🏨 Practical (visa, SIM cards, money, safety, health)\n🍛 Food (what to eat, vegetarian, dealing with spicy)\n🎯 Activities (safaris, surfing, diving, hiking, yoga)\n💑 Special trips (honeymoon, family, solo, backpacking)\n🎉 Culture (festivals, language, customs, scams to avoid)\n\nI know locations, wildlife, photography spots, health tips, transport options & more!\n\nWhat do you want to know about Sri Lanka?", 
-      time: new Date() 
+  const defaultGreeting = {
+    sender: "bot",
+    text:
+      "Hello! 👋 I'm your AI Sri Lanka travel expert - trained on everything you need!\n\n" +
+      "Ask me ANYTHING about:\n" +
+      "✈️ Planning (itineraries, weather, best time)\n" +
+      "🏖️ Places (beaches, waterfalls, temples, wildlife)\n" +
+      "🏨 Practical (visa, SIM cards, money, safety, health)\n" +
+      "🍛 Food (what to eat, vegetarian, dealing with spicy)\n" +
+      "🎯 Activities (safaris, surfing, diving, hiking, yoga)\n" +
+      "💑 Special trips (honeymoon, family, solo, backpacking)\n" +
+      "🎉 Culture (festivals, language, customs, scams to avoid)\n\n" +
+      "I know locations, wildlife, photography spots, health tips, transport options & more!\n\n" +
+      "What do you want to know about Sri Lanka?",
+    time: new Date()
+  };
+
+  const [messages, setMessages] = useState(() => {
+    try {
+      const raw = localStorage.getItem("tripPlannerMessages");
+      if (!raw) return [defaultGreeting];
+      const parsed = JSON.parse(raw);
+      if (!Array.isArray(parsed) || parsed.length === 0) return [defaultGreeting];
+      return parsed.map((msg) => ({
+        ...msg,
+        time: msg.time ? new Date(msg.time) : new Date()
+      }));
+    } catch {
+      return [defaultGreeting];
     }
-  ]);
+  });
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [userContext, setUserContext] = useState({
     month: null,
     days: null,
     interests: [],
     budget: null
   });
+  const apiBaseUrl = import.meta.env.VITE_API_URL || "http://localhost:4000";
+  const clientIdRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const typingTimerRef = useRef(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -210,6 +238,43 @@ export default function ChatBot() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    const trimmed = messages.slice(-30).map((msg) => ({
+      ...msg,
+      time: msg.time instanceof Date ? msg.time.toISOString() : msg.time
+    }));
+    localStorage.setItem("tripPlannerMessages", JSON.stringify(trimmed));
+  }, [messages]);
+
+  useEffect(() => {
+    return () => {
+      if (typingTimerRef.current) {
+        clearInterval(typingTimerRef.current);
+      }
+    };
+  }, []);
+
+  const ensureClientId = () => {
+    if (clientIdRef.current) return clientIdRef.current;
+    try {
+      const existing = localStorage.getItem("tripPlannerClientId");
+      if (existing) {
+        clientIdRef.current = existing;
+        return existing;
+      }
+      const generated = typeof crypto !== "undefined" && crypto.randomUUID
+        ? crypto.randomUUID()
+        : `client-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      localStorage.setItem("tripPlannerClientId", generated);
+      clientIdRef.current = generated;
+      return generated;
+    } catch {
+      const fallback = `client-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      clientIdRef.current = fallback;
+      return fallback;
+    }
+  };
 
   const getSmartResponse = (userText) => {
     const text = userText.toLowerCase().trim();
@@ -814,26 +879,111 @@ export default function ChatBot() {
            "What would you like to know?";
   };
 
-  const handleSend = () => {
-    if (!input.trim()) return;
+  const buildHistory = (messagesList) =>
+    messagesList
+      .filter((msg) => msg.sender === "user" || msg.sender === "bot")
+      .slice(-8)
+      .map((msg) => ({
+        role: msg.sender === "user" ? "user" : "assistant",
+        content: msg.text
+      }));
 
-    const userMessage = { sender: "user", text: input, time: new Date() };
-    setMessages(prev => [...prev, userMessage]);
+  const addBotMessage = (fullText, { animate = true } = {}) => {
+    const messageId = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const baseMessage = { id: messageId, sender: "bot", text: "", time: new Date() };
 
-    setTimeout(() => {
-      const botMessage = { 
-        sender: "bot", 
-        text: getSmartResponse(input),
-        time: new Date()
-      };
-      setMessages(prev => [...prev, botMessage]);
-    }, 600);
+    if (!animate) {
+      setMessages((prev) => [...prev, { ...baseMessage, text: fullText }]);
+      return;
+    }
 
+    setMessages((prev) => [...prev, baseMessage]);
+
+    let index = 0;
+    if (typingTimerRef.current) {
+      clearInterval(typingTimerRef.current);
+    }
+
+    typingTimerRef.current = setInterval(() => {
+      index += 1;
+      setMessages((prev) =>
+        prev.map((msg) =>
+          msg.id === messageId
+            ? { ...msg, text: fullText.slice(0, index) }
+            : msg
+        )
+      );
+
+      if (index >= fullText.length) {
+        clearInterval(typingTimerRef.current);
+        typingTimerRef.current = null;
+      }
+    }, 12);
+  };
+
+  const startBotStream = () => {
+    const messageId = `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const baseMessage = { id: messageId, sender: "bot", text: "", time: new Date() };
+    setMessages((prev) => [...prev, baseMessage]);
+    return messageId;
+  };
+
+  const appendToBotMessage = (messageId, chunk) => {
+    if (!chunk) return;
+    setMessages((prev) =>
+      prev.map((msg) =>
+        msg.id === messageId
+          ? { ...msg, text: msg.text + chunk }
+          : msg
+      )
+    );
+  };
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return;
+
+    const userMessage = { sender: "user", text: input.trim(), time: new Date() };
+    const nextMessages = [...messages, userMessage];
+    setMessages(nextMessages);
     setInput("");
+    setIsLoading(true);
+
+    const clientId = ensureClientId();
+    const history = buildHistory(nextMessages);
+    const botMessageId = startBotStream();
+
+    try {
+      const response = await fetch(`${apiBaseUrl}/api/chat/stream`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userMessage.text, history, clientId })
+      });
+
+      if (!response.ok || !response.body) {
+        const fallback = `AI server is unavailable right now, so here's a built-in answer:\n\n${getSmartResponse(userMessage.text)}`;
+        appendToBotMessage(botMessageId, fallback);
+        return;
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        appendToBotMessage(botMessageId, chunk);
+      }
+    } catch (error) {
+      const fallback = `I couldn't reach the AI server, so here's a built-in answer:\n\n${getSmartResponse(userMessage.text)}`;
+      appendToBotMessage(botMessageId, fallback);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && !isLoading) {
       handleSend();
     }
   };
@@ -911,15 +1061,16 @@ export default function ChatBot() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Ask me anything about your Sri Lanka trip..."
-              className="flex-1 rounded-full border border-sand-300 px-5 py-3 text-sm outline-none focus:border-sand-500"
+              placeholder={isLoading ? "Thinking..." : "Ask me anything about your Sri Lanka trip..."}
+              disabled={isLoading}
+              className="flex-1 rounded-full border border-sand-300 px-5 py-3 text-sm outline-none focus:border-sand-500 disabled:bg-sand-50"
             />
             <button
               onClick={handleSend}
-              disabled={!input.trim()}
+              disabled={!input.trim() || isLoading}
               className="rounded-full bg-sand-900 px-6 py-3 text-sm font-semibold text-sand-50 transition hover:bg-sand-800 disabled:opacity-40"
             >
-              Send
+              {isLoading ? "Thinking..." : "Send"}
             </button>
           </div>
         </div>
